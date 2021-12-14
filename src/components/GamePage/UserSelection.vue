@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>User Selection</h1>
-    <section class="button_container">
+    <section class="button_container" ref="buttons_container">
       <button @click="user_select('rock')">Rock</button>
       <button @click="user_select('paper')">Paper</button>
       <button @click="user_select('scissors')">Scissors</button>
@@ -22,6 +22,7 @@ export default {
   methods: {
     user_select(value) {
       this.$store.commit("user_select", value);
+      this.$refs["buttons_container"].style["pointer-events"] = "none";
       this.$store.commit("update_game_message", "Computer Is Picking...");
       setTimeout(() => this.$store.commit("computer_select"), 1500);
       setTimeout(
@@ -78,6 +79,7 @@ export default {
         this.$store.commit("update_scoreboard_loss", this.scoreboard.loss);
         this.$store.commit("update_game_message", "Sorry you lost!");
       }
+      this.$refs["buttons_container"].style["pointer-events"] = "all";
     },
   },
   // Getting our data from the vuex store
