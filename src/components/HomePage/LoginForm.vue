@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
   name: "login-form",
   methods: {
@@ -22,7 +21,7 @@ export default {
       var email_input = this.$refs["email_input"].value;
       var password_input = this.$refs["password_input"].value;
 
-      axios
+      this.$axios
         .request({
           url: "https://reqres.in/api/login",
           method: "POST",

@@ -4,11 +4,13 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  // All the data we need for our game
   state: {
     scoreboard: {
       wins: 0,
       loss: 0,
       tie: 0,
+      message: ""
     },
     user_selection: {},
     computer_selection: {},
@@ -30,7 +32,11 @@ export default new Vuex.Store({
   },
 
   mutations: {
-
+    // A bunch of mutations to change the data, which then automatically shows the changed data on our page
+    update_game_message(state, payload) {
+      console.log(payload)
+      state.scoreboard.message = payload
+    },
     user_select(state, payload) {
       state.user_selection = state.selections[payload];
     },
@@ -44,7 +50,7 @@ export default new Vuex.Store({
     update_scoreboard_loss(state, payload) {
       state.scoreboard.loss = payload;
     },
-
+    // This is just getting a random selection for the computer
     computer_select(state) {
       const keys = Object.keys(state.selections);
       const prop = keys[Math.floor(Math.random() * keys.length)]
